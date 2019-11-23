@@ -186,7 +186,8 @@ def train(args):
                                  label_len=label_len)
 
     #checkpoints_cb = ModelCheckpoint(args.c, period=1)
-    checkpoints_cb = ModelCheckpoint("../model/ocr_wrnn_ccpd_model.h5", period=1, save_best_only=True)
+    model_path = "%s/ocr_wrnn_ccpd_model.h5" % args.output_dir
+    checkpoints_cb = ModelCheckpoint(model_path, period=1, save_best_only=True)
     cbs = [checkpoints_cb]
 
     if args.log != '':
@@ -229,6 +230,7 @@ def main ():
     parser_train.add_argument('-label-len', type=int, help='标签长度', default=7)
     parser_train.add_argument('-c', help='checkpoints format string', required=True)
     parser_train.add_argument('-log', help='tensorboard 日志目录, 默认为空', default='')
+    parser_train.add_argument('-output-dir', help='模型输出路径, 默认为空', default='')
     parser_train.set_defaults(func=train)
 
     # Argument parser of arguments to export the model

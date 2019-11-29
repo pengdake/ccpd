@@ -17,8 +17,8 @@ A simple code for creating licence plate images and train e2e network based on [
 
 # 0.Start
 ```bash
-git clone https://github.com/caisan/A-Simple-Chinese-License-Plate-Generator-and-Recognition-Framework
-cd A-Simple-Chinese-License-Plate-Generator-and-Recognition-Framework
+git clone http://gitlab.corp.awcloud.com/aistack/aistack-ai-example.git
+cd aistack-ai-example/ccpd/train_model/
 ```
 
 ## 1.Prepare dir
@@ -44,9 +44,9 @@ This process aims to generate images for validate when training.
 
 ## 4.Train
 ```bash
-python main.py train -ti ./data/train_data -tl ./data/train_data/train_data_label.txt -vi ./data/validate_train_data -vl ./data/validate_train_data/validate_train_data.txt -b 16 -img-size 200 40 -n 100 -c checkpoints/'weights.{epoch:02d}-{val_loss:.2f}.h5' -log log
+python main.py train -ti ./data/train_data -tl ./data/train_data/train_data_label.txt -vi ./data/validate_train_data -vl ./data/validate_train_data/validate_train_data.txt -b 16 -img-size 200 40 -n 100 -c checkpoints/'weights.{epoch:02d}-{val_loss:.2f}.h5' -output-dir /tmp -log log
 ```
-After training, the model is in dir ```checkpoints```. It will be loaded for predicting.
+After training, the model is in dir ```/tmp```. It will be loaded for predicting.
 
 ## 5. Test your model and predict plate
 Use test_model.py for testing!
@@ -66,12 +66,6 @@ python detect_plate.py <Your plate image path>
 After execute detect_plate.py, you will get a image named ./cc_plate.jpg with plate region only.
 **NOTE**: this is not predict, it is detect only
 
-# Docker file
-docker file for building docker image:
-```bash
-cd docker
-docker build -f ./Dockerfile -t ccpd-keras-test:v1 .
-```
 
 ## Attention
 * The image size created automatically is 200 * 40, fix the input size when you use the e2e network. You can create and train your own e2e network if you want.  

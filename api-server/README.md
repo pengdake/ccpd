@@ -1,10 +1,13 @@
 ## 运行api服务
 
 ```bash
-python api.py <model_file_path>
+python api.py --model_path <model_path> --model_type <model_type>
 ```
-后面指定模型文件的路径。
+
+model_path: 模型文件的路径。
+model_type: 模型类型，支持gru或者wrnn
+
 例如：
 ```bash
-python /root/data/storage_name/code/ccpd/api-server/api.py /root/data/storage_name/model
+python /root/data/storage_name/code/ccpd/api-server/api.py --model_path /root/data/storage_name/model --model_type wrnn
 ```

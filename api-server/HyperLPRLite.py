@@ -14,11 +14,15 @@ chars = [u"京", u"沪", u"津", u"渝", u"冀", u"晋", u"蒙", u"辽", u"吉",
              ]
 
 class LPR():
-    def __init__(self,model_detection,model_finemapping,model_seq_rec):
+    def __init__(self,model_detection,model_finemapping,model_seq_rec,model_type):
         self.watch_cascade = cv2.CascadeClassifier(model_detection)
         self.modelFineMapping = self.model_finemapping()
         self.modelFineMapping.load_weights(model_finemapping)
-        self.modelSeqRec = self.model_seq_rec(model_seq_rec)
+        self.modelType = model_type
+        if model_type == "wrnn":
+            self.modelSeqRec = self.model_seq_rec(model_seq_rec)
+        elif model_type == "gru":
+            self.modelSeqRec = self.model_seq_rec_gru(model_seq_rec)
 
     def computeSafeRegion(self,shape,bounding_rect):
         top = bounding_rect[1] # y
@@ -162,7 +166,10 @@ class LPR():
 
     def recognizeOne(self,src, graph):
         x_tempx = src
-        x_temp = cv2.resize(x_tempx,( 160,40))
+        if self.modelType == "gru":
+            x_temp = cv2.resize(x_tempx,( 164,48))
+        elif self.modelType == "wrnn":
+            x_temp = cv2.resize(x_tempx,( 160,40))
         x_temp = x_temp.transpose(1, 0, 2)
         with graph.as_default():
             y_pred = self.modelSeqRec.predict(np.array([x_temp]))

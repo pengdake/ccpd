@@ -167,9 +167,9 @@ class LPR():
     def recognizeOne(self,src, graph):
         x_tempx = src
         if self.modelType == "gru":
-            x_temp = cv2.resize(x_tempx,( 164,48))
+            x_temp = cv2.resize(x_tempx,(164,48))
         elif self.modelType == "wrnn":
-            x_temp = cv2.resize(x_tempx,( 160,40))
+            x_temp = cv2.resize(x_tempx,(160,40))
         x_temp = x_temp.transpose(1, 0, 2)
         with graph.as_default():
             y_pred = self.modelSeqRec.predict(np.array([x_temp]))

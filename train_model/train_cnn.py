@@ -224,7 +224,7 @@ def main ():
     parser_train.add_argument('-vl','--validate_label', dest='vl', help='validate label file', required=True)
     parser_train.add_argument('-b','--batch_size', dest='b', type=int, help='batch size', required=True)
     parser_train.add_argument('-img-size', type=int, nargs=2, help='width and length of tran img', required=True)
-    parser_train.add_argument('-pre','--pre_trained_weight', help='pre trained weight file', default='')
+    parser_train.add_argument('-pre','--pre_trained_weight', dest='pre', help='pre trained weight file', default='')
     parser_train.add_argument('-start-epoch', type=int, default=0)
     parser_train.add_argument('-n','--epochs',dest='n', type=int, help='number of epochs', required=True)
     parser_train.add_argument('-label-len', type=int, help='label length', default=7)

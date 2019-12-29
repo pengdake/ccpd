@@ -17,7 +17,7 @@ function run_user_custom_command() {
 
 function run_jupyter_notebook() {
     sed -i "s/^c.NotebookApp.token.*$/c.NotebookApp.token = '$JUPYTER_TOKEN'/g"   /root/.jupyter/jupyter_notebook_config.py
-    sed -i "s/#c.NotebookApp.base_url.*$/c.NotebookApp.base_url = '${TASK_NAME}\/'/g"   /root/.jupyter/jupyter_notebook_config.py
+    sed -i "s/^c.NotebookApp.base_url.*$/c.NotebookApp.base_url = '${TASK_NAME}\/'/g"   /root/.jupyter/jupyter_notebook_config.py
     exec jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root
 }
 

@@ -75,12 +75,9 @@ def upload_file():
         upload_path = os.path.join(basepath, filename)
         f.save(upload_path)
         res = Recognize(upload_path, model_path, model_type)
-        result = {}
-        result = {"type": "text"}
-        if not res:
-            result['data'] = ''
-            return make_response(jsonify(result), 200)
-        result['data'] = res
+        result = {"type": "text", "data": ""}
+        if res:
+            result['data'] = res
         os.remove(upload_path)
         return make_response(jsonify(result), 200)
     except Exception as err:

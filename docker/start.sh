@@ -35,6 +35,7 @@ function run_tensorflow_session() {
     esac
 }
 
+export -p > /etc/profile.d/ai_env.sh
 case $RESOURCE_TYPE in
     "session"     ) run_tensorflow_session ;;
 esac
